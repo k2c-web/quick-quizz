@@ -1,0 +1,89 @@
+.root {
+  color: rgb(60, 57, 57);
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+}
+
+.question-fieldset {
+  font-size: 20px;
+  box-sizing: border-box;
+  margin: 0;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  background-color: rgb(221, 228, 243);
+}
+
+.question-fieldset form {
+  box-sizing: border-box;
+  margin: 40px 0 20px 0;
+}
+
+.question-fieldset button {
+  box-sizing: border-box;
+  display: block;
+  padding: 10px 30px;
+  border: none;
+  margin: 50px auto 20px;
+  border-radius: 10px;
+  background-color: rgba(159, 159, 209, 0.2);
+  color: rgb(60, 57, 57);
+}
+
+.submitted .green {
+  color: green;
+}
+
+.submitted .red {
+  color: red;
+}
+
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+}
+
+.checkbox-grid .input-label {
+  background-color: rgba(159, 159, 209, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  border-radius: 10px;
+  color: rgb(60, 57, 57);
+}
+
+@media screen and (min-width: 960px) {
+
+  .question-fieldset {
+    padding-top: 80px;
+  }
+  
+}
+
+
+@media screen and (max-width: 480px) {
+
+  .question-fieldset {
+    font-size: 18px;
+  }
+
+  .checkbox-grid {
+    grid-column-gap: 4px;
+    grid-row-gap: 4px;
+  }
+
+  .checkbox-grid .input-label {
+    padding: 6px;
+  }
+  
+}
+
+
