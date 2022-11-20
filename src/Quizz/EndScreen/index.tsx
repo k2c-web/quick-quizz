@@ -20,6 +20,7 @@ const EndScreen: React.FC<Props> = ({ quizzLength, quizzScore, ended }) => {
 
   return (
     <section ref={rootRef} className="end-screen">
+      <p>Le scroll est débloqué, remontez voir en détails si vous le souhaitez :)</p>
       <h2>
         Votre Score final : {quizzScore} sur {quizzLength * 4}
       </h2>

@@ -1,5 +1,6 @@
 import Text from '../../Commons/Text'
 import { FC } from 'react'
+import './style.css'
 
 type Props = {
   children?: React.ReactNode

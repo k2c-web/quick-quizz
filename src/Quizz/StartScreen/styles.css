@@ -6,6 +6,14 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  flex-direction: row-reverse;
+}
+
+
+@media screen and (max-width: 660px) {
+  .start-screen {
+    flex-direction: column;
+  }
 }
 
 .start-screen button {
@@ -14,9 +22,17 @@
   align-items: center;
   justify-content: center;
   padding: 100px;
-  border-radius: 10px;
+  border-radius: 5px;
+  border: 1px dotted indigo;
   color: rgb(60, 57, 57);
 }
+
+@media screen and (min-width: 660px) {
+  .start-screen button {
+    margin-right: 40px;
+  }
+}
+
 
 .start-screen button,
 .start-screen p {
@@ -26,4 +42,5 @@
 .start-screen ul {
   margin: 0 0 20px 0;
   padding: 0;
+  list-style-position: inside;
 }

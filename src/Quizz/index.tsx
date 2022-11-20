@@ -21,8 +21,9 @@ const Quizz: FC<Props> = () => {
 
   // Computed
   const QuestionsLength = questionsSet?.length
-
+  const started = activeIndex === -1
   const ended = activeIndex > QuestionsLength - 1
+  const lastQ = activeIndex === QuestionsLength - 1
 
   // Functions
   const startGame = () => setActiveIndex(0)
@@ -31,12 +32,14 @@ const Quizz: FC<Props> = () => {
 
   const updateScore = (value: number) => setQuizzScore(quizzScore + value)
 
+  const wording = quizzScore <= 1 ? " point" : " points"
+  const headerTitle = started || ended ? 'Quick Quizz !' : quizzScore + wording
 
   return (
     <>
-      <Header>Score : {quizzScore}</Header>
+      <Header>{headerTitle}</Header>
       <div className="quizz-root">
-        {<StartScreen startGame={startGame} activeIndex={activeIndex} ended={ended} />}
+        {<StartScreen startGame={startGame} ended={ended} />}
         {activeIndex >=0 && questionsSet.map((q: q, i: number) => {
           return (
             <Question
@@ -46,6 +49,7 @@ const Quizz: FC<Props> = () => {
               isActive={activeIndex === i}
               setActiveIndex={handleNext}
               updateScore={updateScore}
+              lastQ={lastQ}
             />
           )
         })}

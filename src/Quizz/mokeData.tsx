@@ -1,7 +1,7 @@
 const questionsSet = [
   {
     question: 'Pour un développeur JavaScript Que signifie ES',
-    time: 10,
+    time: 15,
     responses: [
       {
         title: ' Economique et Social',
@@ -22,8 +22,8 @@ const questionsSet = [
     ],
   },
   {
-    question: 'Quand on parle de "state" react, parle de ?',
-    time: 20,
+    question: 'Quand on parle de "state" react ?',
+    time: 25,
     responses: [
       {
         title: 'Communication entre un composant parent et un composant enfant',
@@ -34,19 +34,19 @@ const questionsSet = [
         valid: false,
       },
       {
-        title: 'Un etat local défini dans un composant',
+        title: "Un etat local défini à l'interieur d'u composant",
         valid: true,
       },
       {
         title:
-          'Une valeur privé dont la modification va re-rendre le composant',
+          'Une valeur dont la modification va re-rendre le composant',
         valid: true,
       },
     ],
   },
   {
-    question: 'Parmi ces hooks react lesquels existent réellement',
-    time: 20,
+    question: 'Parmi ces hooks react lesquels existent ?',
+    time: 25,
     responses: [
       {
         title: 'UseEffect',
@@ -67,26 +67,51 @@ const questionsSet = [
     ],
   },
   {
-    question: 'Les "props" permettent ?',
-    time: 20,
+    question: 'Les props permettent de ?',
+    time: 25,
     responses: [
       {
         title:
-          'De communiquer entre un composant parent et un composant enfant',
+          'Communiquer entre un composant parent et un composant enfant',
         valid: true,
       },
       {
         title:
-          'De communiquer entre un composant enfant et un composant parent',
+          'Communiquer entre un composant enfant et un composant parent',
         valid: true,
       },
       {
         title:
-          'De communiquer avec des composants "voisins" et sans lien de parité',
+          'Communiquer avec des composants "voisins" et sans lien de parité',
         valid: false,
       },
       {
-        title: "D'utiliser un reducer afin de gérer le state",
+        title: "Utiliser un reducer afin de gérer le state du store",
+        valid: false,
+      },
+    ],
+  },
+  {
+    question: 'Les attributs des balises renommés en jsx ?',
+    time: 25,
+    responses: [
+      {
+        title:
+          'htmlFor',
+        valid: true,
+      },
+      {
+        title:
+          'altText',
+        valid: false,
+      },
+      {
+        title:
+          'className',
+        valid: true,
+      },
+      {
+        title: "cssStyle",
         valid: false,
       },
     ],

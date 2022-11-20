@@ -12,6 +12,7 @@ type Props = {
   updateScore: Function
   isActive: boolean
   activeIndex: number
+  lastQ:boolean
 }
 
 type State = { value: boolean }[]
@@ -40,6 +41,7 @@ const Question: FC<Props> = ({
   activeIndex,
   setActiveIndex,
   updateScore,
+  lastQ
 }) => {
   // Init the initial state according to the number of questions provided in the data
   const initialState: State = []
@@ -53,7 +55,6 @@ const Question: FC<Props> = ({
   // State
   const [time, setTime] = useState(data.time)
   const [state, dispatch] = useReducer(reducer, initialState)
-  //const [error, setError] = useState<null | boolean>(null)
   const [submitted, setSubmitted] = useState<boolean>(false)
   const [score, setScore] = useState(0)
   const [elapsed, setElapsed] = useState(false)
@@ -61,6 +62,53 @@ const Question: FC<Props> = ({
   // Dom
   const rootRef = useRef<HTMLDivElement>(null)
 
+  //Methods
+  const check = () => {
+    let responses: boolean[] = []
+    let success: boolean[] = []
+
+    Object.keys(state).map((k) => {
+      const key = parseInt(k)
+      success.push(state[key]?.value)
+      responses.push(state[key]?.value)
+    })
+    const arr = responses.indexOf(true) !== -1 ? success : []
+    changeAllScores(arr)
+    
+  }
+
+  const onInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number,
+  ) => {
+    dispatch({
+      type: 'UPDATE',
+      payload: { index: index, checked: e.target.checked },
+    })
+  }
+
+  const changeAllScores = (success: boolean[]) => {
+    setScore(success.length)
+    updateScore(success.length)
+  }
+
+  // When form is submitted compare checked checkboxes with answers
+  const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    check()
+    setSubmitted(true)
+  }
+
+  // When Time is elapsed check answers
+  const onTimeOut = () => {
+    check()
+    setElapsed(true)
+    lastQ && setSubmitted(true)
+  }
+
+  /* EFFECTS */
+
+  // Scroll active question into viewport
   useEffect(() => {
     if (!!isActive && rootRef?.current) {
       rootRef.current.scrollIntoView({
@@ -73,71 +121,23 @@ const Question: FC<Props> = ({
 
   useEffect(() => {
     if (!isActive) return
-
     time > 0 ? setTimeout(() => setTime(time - 1), 1000) : onTimeOut()
   }, [isActive, time])
-
-  const onTimeOut = () => {
-    let errors: boolean[] = []
-    let success: boolean[] = []
-
-    Object.keys(state).map((k) => {
-      const key = parseInt(k)
-      const arrayRef =
-        state[key]?.value !== data.responses[key].valid ? errors : success
-
-      arrayRef.push(state[key]?.value)
-    })
-    changeAllScores(success)
-    setElapsed(true)
-
-    //setSubmitted(true)
-  }
-  const onInputChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number,
-  ) => {
-    dispatch({
-      type: 'UPDATE',
-      payload: { index: index, checked: e.target.checked },
-    })
-  }
-
-  const question: string = data?.question
-  const possibleResponses: Responses = data?.responses
-
-  const changeAllScores = (success: boolean[]) => {
-    setScore(success.length)
-    updateScore(success.length)
-  }
-
-  // When form is submitted compare checked checkboxes with answers
-  const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    let errors: boolean[] = []
-    let success: boolean[] = []
-
-    Object.keys(state).map((k) => {
-      const key = parseInt(k)
-      const arrayRef =
-        state[key]?.value !== data.responses[key].valid ? errors : success
-
-      arrayRef.push(state[key]?.value)
-    })
-
-    setSubmitted(true)
-    changeAllScores(success)
-  }
 
   // When a question is submitted change the active index to have next question activated
   useEffect(() => {
     if (submitted) setActiveIndex(activeIndex + 1)
   }, [submitted])
 
+  
+  const question: string = data?.question
+  const possibleResponses: Responses = data?.responses
+
+
   return (
     <section className={'root'} ref={rootRef}>
       <fieldset className="question-fieldset">
-        <h2>{question} ?</h2>
+        <h2>{question}</h2>
         <div> Temps restant : {time === 0 ? 'écoulé' : time}</div>
         <form onSubmit={onFormSubmit}>
           <div className="checkbox-grid">
@@ -155,8 +155,8 @@ const Question: FC<Props> = ({
                     className={
                       (!!value?.valid && !!state[index]?.value) ||
                       (!value?.valid && !state[index]?.value)
-                        ? 'green'
-                        : 'red'
+                        ? ''
+                        : 'green'
                     }
                     htmlFor={`response${index}`}
                   >

@@ -2,6 +2,7 @@
   height: 100vh;
   width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: rgb(221, 228, 243);
@@ -11,5 +12,11 @@
   margin: 0;
   padding: 100px;
   background-color: rgba(159, 159, 209, 0.2);
+  color:steelblue;
   border-radius: 10px;
+}
+
+.end-screen p {
+  color: steelblue;
+  font-size: 20px;
 }

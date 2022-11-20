@@ -24,6 +24,7 @@
 }
 
 .question-fieldset button {
+  font-size: inherit;
   box-sizing: border-box;
   display: block;
   padding: 10px 30px;
@@ -32,6 +33,7 @@
   border-radius: 10px;
   background-color: rgba(159, 159, 209, 0.2);
   color: rgb(60, 57, 57);
+  cursor:pointer;
 }
 
 .submitted .green {
@@ -60,8 +62,12 @@
   color: rgb(60, 57, 57);
 }
 
-@media screen and (min-width: 960px) {
+.checkbox-grid .input-label input {
+  margin-left: 10px;
+}
 
+
+@media screen and (min-width: 960px) {
   .question-fieldset {
     padding-top: 80px;
   }

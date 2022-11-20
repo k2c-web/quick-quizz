@@ -1,3 +1,0 @@
-- Quel attribut jsx n'existe pas avec cette syntaxe ?
-
-className / htmlFor / 

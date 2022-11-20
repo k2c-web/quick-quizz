@@ -1,8 +1,8 @@
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { RemoveScroll } from 'react-remove-scroll'
 import './styles.css'
 
-const StartScreen = ({ startGame, activeIndex, ended }: { startGame: React.MouseEventHandler, activeIndex: number, ended: boolean }) => {
+const StartScreen = ({ startGame, ended }: { startGame: React.MouseEventHandler,  ended: boolean }) => {
 
   useEffect( () => {
     window.scrollTo(0, 0)
@@ -11,22 +11,19 @@ const StartScreen = ({ startGame, activeIndex, ended }: { startGame: React.Mouse
   return (
     <RemoveScroll enabled={!ended}>
       <section className="start-screen" onClick={startGame}>
-        <p>
+        <div>
+        <h2>Règles du Jeu :</h2>
           <ul>
-            <li>Il y a 4 points par réponse</li>
-            <li>Il y a au moins une, ou plusieurs bonnes réponses</li>
-            <li>Vous marquez un point si vous selectionnez une bonne réponse</li>
+            <li>4 points à gagner par question</li>
+            <li>1 ou plusieurs bonnes réponses</li>
+            <li>1 point par bonne réponse cochée</li>
             <li>
-              Vous ne marquez pas le point si vous selectionnez une mauvaise
-              réponse
+              1 point par mauvaise réponse non cochée
             </li>
-            <li>
-              Il faut au moins cocher une réponse pour scorer sur la question
-            </li>
+            <li>1 réponse minimum pour scorer</li>
           </ul>
-
-          <button>Start Quizz</button>
-        </p>
+        </div>
+        <button>Start Quizz</button>
       </section>
     </RemoveScroll>
   )
